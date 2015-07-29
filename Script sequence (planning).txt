@@ -1,0 +1,72 @@
+First created: 17.03.2011
+
+
+Script sequence:
+
+Run elevated!
+	Methods:
+		- ahk
+		- "elevate" <-
+Done?: x
+
+(- Check for admin rights/elevation)
+	Methods:
+		- "net localgroup test /add"
+		- "netstat -b"
+		- "ren 'read-only file to normal user, eg. in PROGRA~1' same name"
+		- add and delete registry entry ("HKCR\Admintest")
+		- "fsutil>nul"
+		- "bcdedit>nul" <-
+Done?: x
+
+
+Check if is static ("set") or DHCP ("reset"). (ipconfig /all | find "DHCP")
+	-If "set", reset to DHCP.
+	-If "not set", set to static.
+Done?: x
+
+- Prompt for disabling Wireless Network (PCI(e)) card [Y,N]
+Done?: x
+
+- Check for existance of "devcon.exe"
+	- If yes, do devcon commands
+Done?: x
+
+- Check OS type (x86, AMD64 or IA64) (%processor_architecture%)
+Done?: x
+
+With devcon:
+- Get HWIDS (HardWare IDS) to variable ('devcon findall PCI\*')
+- Search for WIFI card (keyw. "Wireless", "WLAN", "WiFi")
+- Use it's HWID
+- Disable it
+Done?: x
+
+
+(- Check for "choice")
+Done?: x
+
+(- Check for processor architecture (x86, AMD64 or IA64))
+	- Set "\m" switch for "choice" command for x64
+Done?: x
+
+- Get (localized) interface name (eg. "Lokal tilkobling") of netsh (Netw. Serv. shell)
+Done?: x
+
+- Prompt for IP address
+Done?: x
+
+- Generate standard gateway (192.168.'the one used in IP'.1)
+Done?: x
+
+- Set IP address, subnet mask and standard gateway
+Done?: x
+
+(- Prompt for DNS server IP)
+Done?: x
+
+- Set DNS servers IP
+Done?: x
+
+- Write end message (w/ current config, )
+Done?: x
