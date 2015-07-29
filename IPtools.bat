@@ -16,7 +16,7 @@ REM Description: .bat "Set DHCP or static?" "Enable or disable wireless adapter?
 
 REM ------------ Copyright ------------
 REM -----------------------------------
-REM Copyright (C) 2010-toyear  aude
+REM Copyright (C) 2011-toyear  aude
 REM
 REM This program is free software: you can redistribute it and/or modify
 REM it under the terms of the GNU General Public License as published by
