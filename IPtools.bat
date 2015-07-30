@@ -104,7 +104,7 @@ echo.
 echo.
 
 REM Check for elevation.
-echo Checking for elevation ^(administrative privileges^) ...
+echo Checking for elevation ^(administrative privileges^)...
 REM Try initiate app that requires elevation. Will fail if not admin, will display available commands if admin (but do not display these).
 REM ~https://stackoverflow.com/a/21295806
 fsutil dirty query %systemdrive% >NUL
@@ -253,16 +253,16 @@ if "%forcedwirelesstoggleway%" neq "" (
 		goto skipipsourceset
 	)
 )
-REM If set to static ...
+REM If set to static...
 if "%ipsourceset%" equ "static" (
-	REM ... update the address in any condition.
+	REM ...update the address in any condition.
 	call :setstatic
 ) else (
-	REM If set to DHCP ...
+	REM If set to DHCP...
 	if "%ipsourceset%" equ "dhcp" (
-		REM ... and DHCP is not already enabled ...
+		REM ...and DHCP is not already enabled...
 		if "%dhcpethernetenabled%" neq "y" (
-			REM ... set to DHCP.
+			REM ...set to DHCP.
 			call :setdhcp
 		)
 	REM If not set to static or DHCP, undefined error has occurred.
@@ -309,9 +309,9 @@ echo -- ERROR --
 echo -----------
 echo.
 
-REM If "elevate.exe" is not found ...
+REM If "elevate.exe" is not found...
 if not exist %elevateexe% (
-	REM ... inform and ask user to run the batch file with administrative privileges manually.
+	REM ...inform and ask user to run the batch file with administrative privileges manually.
 	echo Did not find %elevateexe%.
 	echo Please check whether the path is valid, and correct the "elevateexe" variable in the top of this batch file if necessary.
 	echo.
@@ -322,7 +322,7 @@ if not exist %elevateexe% (
 	echo.
 ) else (
 	REM Inform.
-	echo Elevating %0 with %elevateexe% ...
+	echo Elevating %0 with %elevateexe%...
 	REM Initiate an elevated process of this batch, with appended current command line switches.
 	%elevateexe% %0 %*
 )
@@ -435,10 +435,10 @@ for /f "tokens=* delims=" %%a in ('%devconexe% findall PCI\*') do (
 			REM Inform.
 			for /f "tokens=2* delims=:" %%g in ("%%a") do (
 				if "%wirelesstoggleway%" equ "enable" (
-					echo Enabling "%%g" ...
+					echo Enabling "%%g"...
 				)
 				if "%wirelesstoggleway%" equ "disable" (
-					echo Disabling "%%g" ...
+					echo Disabling "%%g"...
 				)
 			)
 			REM And <en>|<dis>able it!
@@ -483,17 +483,17 @@ if not defined standardgateway (
 		set standardgateway=192.168.%%c.1
 	)
 )
-echo Setting IP address ^(to "%ip%"^), subnet mask ^(to "%subnetmask%"^) and standard gateway ^(to "%standardgateway%"^) ...
+echo Setting IP address ^(to "%ip%"^), subnet mask ^(to "%subnetmask%"^) and standard gateway ^(to "%standardgateway%"^)...
 netsh int ip set address name="%netshinterface%" source=static addr=%ip% mask=%subnetmask% gateway=%standardgateway% gwmetric=1
 if %errorlevel% neq 0 goto incorrectstaticip
 
-echo Setting primary DNS ^(to "%dns1%"^) ...
+echo Setting primary DNS ^(to "%dns1%"^)...
 REM netsh int ip set dns name="%netshinterface%" source=static addr=%dns1% validate=no & REM Previous version, did not successfully update the changed interface ip source to "static".
 netsh int ip add dns name="%netshinterface%" addr=%dns1% validate=no index=1
 
 REM Set secondary DNS if present.
 if defined dns2 (
-	echo Setting secondary DNS ^(to "%dns2%"^) ...
+	echo Setting secondary DNS ^(to "%dns2%"^)...
 	netsh int ip add dns name="%netshinterface%" addr=%dns2% validate=no index=2
 )
 
@@ -562,15 +562,15 @@ if %errorlevel% equ 2 (
 echo.
 :skipdhcpsetconfirmation
 
-echo Resetting IP Address and Subnet Mask to DHCP ...
+echo Resetting IP Address and Subnet Mask to DHCP...
 netsh int ip set address name="%netshinterface%" source=dhcp
 REM If an error occurs, it it most likely because DHCP is already enabled. Thus, skip setting the rest of the DNS info.
 if %errorlevel% neq 0 call :setdhcperror && goto :eof
 
-echo Resetting DNS to DHCP ...
+echo Resetting DNS to DHCP...
 netsh int ip set dns name="%netshinterface%" source=dhcp
 
-echo Resetting Windows Internet Name Service ^(WINS^) to DHCP ...
+echo Resetting Windows Internet Name Service ^(WINS^) to DHCP...
 netsh int ip set wins name="%netshinterface%" source=dhcp
 
 echo.
