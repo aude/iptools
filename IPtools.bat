@@ -161,7 +161,7 @@ for /f "tokens=1-7 delims= " %%a in ("%*") do (
 REM Get (localized) interface name (eg. "Lokal tilkobling") of netsh (Netw. Serv. shell))
 for /f "tokens=3*" %%a in ('netsh int show int ^| find "Lo"') do (
 	set netshinterface=%%b
-	
+
 	REM Quit the loop.
 	goto netshinterfaceretrievalreturn
 )
